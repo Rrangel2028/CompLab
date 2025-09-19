@@ -1,0 +1,226 @@
+/* =========================
+   CompLab · Registro (CSS)
+   ========================= */
+
+/* Pantalla completa sin scroll global */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* quitamos la barra de la ventana */
+  }
+  
+  /* Tokens */
+  :root{
+    --card-bg:#fff;
+    --card-radius:20px;
+    --shadow: 0 10px 30px rgba(19,33,68,.08);
+    --border:#e9eef5;
+    --text:#1b2a41;
+    --muted:#6c7a92;
+    --primary:#2152ff;
+    --success:#22c55e;
+    --warn:#f59e0b;
+    --danger:#ef4444;
+  }
+  
+  /* Layout general */
+  .split--registro{
+    height: 100vh; /* ocupa toda la ventana */
+    display: grid;
+    grid-template-columns: minmax(360px, 560px) 1fr;
+    gap: 24px;
+    padding: 40px 24px;
+    background: linear-gradient(180deg, #f5f8ff, #edf2ff);
+  }
+  
+  /* Panel izquierdo */
+  .left{
+    min-height: 0;              /* permite a los hijos calcular alturas (clave en grid) */
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  
+  .card{
+    width:100%;
+    background: var(--card-bg);
+    border:1px solid var(--border);
+    border-radius: var(--card-radius);
+    box-shadow: var(--shadow);
+    padding:32px 28px;
+  
+    /* Evita que se corte el botón: si el contenido crece, scroll SOLO aquí */
+    max-height: calc(100vh - 80px);  /* margen visual arriba/abajo */
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+  
+  /* Scrollbar sutil en la tarjeta */
+  .card::-webkit-scrollbar{ width: 10px; }
+  .card::-webkit-scrollbar-thumb{
+    background: rgba(0,0,0,.15);
+    border-radius: 999px;
+  }
+  .card{ scrollbar-width: thin; scrollbar-color: rgba(0,0,0,.15) transparent; }
+  
+  /* Branding compacto */
+  .brand{
+    display: flex;
+    align-items: center;
+    gap: 12px;        /* espacio entre logo y texto */
+    margin-bottom: 16px;
+  }
+  
+  .brand__logo{
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+  }
+  
+  .brand__text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .brand__title{
+    font-size: clamp(20px, 2vw, 26px);
+    margin: 0;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  
+  .brand__subtitle{
+    color: var(--muted);
+    margin: 2px 0 0;
+    font-size: 14px;
+    line-height: 1.3;
+  }
+  
+  /* Formulario */
+  .form{ margin-top:10px; }
+  .grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .field{ margin-bottom:12px; }
+  .label{ display:block; font-weight:600; margin:0 0 6px; color:var(--text); font-size:14px; }
+  
+  .input_wrap{
+    position:relative;
+    display:flex;
+    align-items:center;
+  }
+  .icon-img,
+  .input_wrap svg.icon-img{
+    width:18px; height:18px; opacity:.7;
+    position:absolute; left:12px; top:50%; transform: translateY(-50%);
+  }
+  
+  .input{
+    width:100%;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:12px 42px 12px 36px; /* espacio para icono izquierda + botón ojo derecha */
+    outline:none;
+    transition: border .2s ease, box-shadow .2s ease;
+    background:#fff;
+  }
+  .input:focus{
+    border-color: rgba(33,82,255,.5);
+    box-shadow: 0 0 0 4px rgba(33,82,255,.08);
+  }
+  
+  /* Mostrar/ocultar contraseña */
+  .toggle-pass{
+    position:absolute;
+    right:8px;
+    width:34px; height:34px;
+    display:grid; place-items:center;
+    border:none; background:transparent; cursor:pointer;
+  }
+  .toggle-pass svg{ width:18px; height:18px; transition: opacity .2s, transform .2s; }
+  .icon-eye{ opacity:0; transform: scale(.8); }
+  .icon-eye-slash{ opacity:1; transform: scale(1); }
+  .toggle-pass.active .icon-eye{ opacity:1; transform: scale(1); }
+  .toggle-pass.active .icon-eye-slash{ opacity:0; transform: scale(.8); }
+  
+  /* Medidor de fuerza */
+  .pass-meter{
+    height:6px; width:100%;
+    background:#eef2ff; border-radius:999px;
+    margin:8px 0 4px;
+    overflow:hidden;
+  }
+  .pass-meter__bar{
+    height:100%; width:0%;
+    background:var(--danger);
+    transition: width .25s ease, background .25s ease;
+  }
+  .hint{ color:var(--muted); font-size:12px; }
+  
+  /* Botón principal y texto alterno */
+  .btn--full{ width:100%; }
+  .alt-action{
+    text-align:center;
+    margin-top:14px;
+    font-size:14px;
+    color:var(--muted);
+  }
+  .alt-action a{ color:var(--primary); font-weight:600; }
+  
+  /* Panel derecho fijo (sin slider) */
+  .right.right--fixed{
+    border-radius: 18px;
+    background-image: var(--photo); /* se pasa desde el HTML: style="--photo:url('slides/A1.jpg')" */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+  }
+  .right.right--fixed::after{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(90deg, rgba(0,0,0,.14), rgba(0,0,0,0));
+    pointer-events:none;
+  }
+  
+  /* Responsive */
+  @media (max-width: 900px){
+    /* En móvil sí dejamos scroll global para evitar cortes */
+    html, body { overflow: auto; }
+  
+    .split--registro{
+      height: auto; /* deja crecer verticalmente */
+      grid-template-columns: 1fr;
+      padding: 24px 16px;
+    }
+    .right{ display:none; }
+    .grid{ grid-template-columns: 1fr; }
+    .card{ max-height: none; } /* sin límite en móvil */
+  }
+  
+  /* Quitar cualquier vestigio de slideshow si existía */
+  .slideshow{ display:none !important; }
+
+  /* Mensajes bajo el campo de Confirmar contraseña */
+.field-msg{
+    margin-top: 6px;
+    font-size: 13px;
+    line-height: 1.25;
+    color: var(--muted);
+  }
+  .field-msg.is-ok{ color: var(--success); }
+  .field-msg.is-error{ color: var(--danger); }
+  .field-msg.is-hint{ color: var(--muted); }
+  
+  /* Estado visual del botón deshabilitado */
+  button[type="submit"]:disabled{
+    opacity: .6;
+    cursor: not-allowed;
+    filter: grayscale(10%);
+  }
+  
