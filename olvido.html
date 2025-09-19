@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CompLab | Restablecer contraseña</title>
+  <link rel="stylesheet" href="olv.css" />
+</head>
+<body>
+  <div class="split">
+    <!-- Izquierda -->
+    <section class="left">
+      <header class="brand">
+        <img src="iconos/logo.png" alt="Logo de CompLab" class="brand__logo" /> 
+        <p class="brand__text">
+          Ingresa tu correo y te enviaremos un enlace para continuar con el proceso.
+        </p>
+      </header>
+
+      <form class="card" novalidate>
+        <label for="email" class="label">Correo electrónico</label>
+        <input id="email" type="email" class="input" placeholder="tu@correo.com" required />
+
+        <button type="submit" class="btn">Enviar enlace</button>
+        <a href="index.html" class="link">Volver al inicio de sesión</a>
+      </form>
+    </section>
+
+    <!-- Derecha con imagen -->
+    <aside class="right" aria-hidden="true"></aside>
+  </div>
+</body>
+</html>
